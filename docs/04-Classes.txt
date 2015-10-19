@@ -5,3 +5,9 @@
 2、WelcomeActivity  欢迎页
 
 3、MainActivity  主界面
+
+4、主界面4个大模块Fragment定义:
+    DisCoverFragment       发现栏目
+    CustomTingFragment     定制听
+    DownloadTingFragment   下载听
+    PersonalFragment       我（个人中心）
