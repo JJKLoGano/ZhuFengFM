@@ -11,7 +11,9 @@
 
         <!-- 应用程序日入口点！！！禁止改动！！！ -->
 
-        <activity android:name=".SplashActivity" >
+        <activity
+                android:name=".SplashActivity"
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

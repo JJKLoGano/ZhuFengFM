@@ -19,16 +19,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:padding="10dp"
                 >
                 <RadioButton
                         android:id="@+id/main_tab_item_discover"
                         style="@style/AppTheme.MainTabItem"
-                        android:drawableTop=""
                         android:text="发现"
+                        android:drawableTop="@drawable/tab4_selector"
                         />
                 <RadioButton
                         android:id="@+id/main_tab_item_custom"
                         style="@style/AppTheme.MainTabItem"
+                        android:drawableTop="@drawable/tab1_selector"
                         android:text="定制听"
                         />
                 <RadioButton
@@ -39,11 +41,13 @@
                 <RadioButton
                         android:id="@+id/main_tab_item_download"
                         style="@style/AppTheme.MainTabItem"
+                        android:drawableTop="@drawable/tab2_selector"
                         android:text="下载听"
                         />
                 <RadioButton
                         android:id="@+id/main_tab_item_personal"
                         style="@style/AppTheme.MainTabItem"
+                        android:drawableTop="@drawable/tab5_selector"
                         android:text="我"
                         />
 

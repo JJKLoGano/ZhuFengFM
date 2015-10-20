@@ -2,11 +2,9 @@ package com.jjklogano.zufengfm;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
-import java.util.logging.Handler;
 
 /**
  * 启动扉页
