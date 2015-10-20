@@ -11,3 +11,9 @@
     CustomTingFragment     定制听
     DownloadTingFragment   下载听
     PersonalFragment       我（个人中心）
+
+======================================================
+发现部分子Fragment定义：
+1、DiscoverRecommendFragment     发现-》推荐  对应11接口
+
+2、DiscoverCategoryFragment     发现-》分类  对应12接口

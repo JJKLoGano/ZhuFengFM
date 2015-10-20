@@ -1,10 +1,10 @@
 package com.jjklogano.zufengfm;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.RadioGroup;
 import com.jjklogano.zufengfm.fragments.CustomTingFragment;
 import com.jjklogano.zufengfm.fragments.DiscoverFragment;
@@ -18,14 +18,14 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
      */
     private Fragment[] fragments;
     private FragmentManager manager;
-    private int showingIndex=0;
+    private int showingIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        manager =getSupportFragmentManager();
+        manager = getSupportFragmentManager();
 
         //TODO 测试横竖屏切换数组对象状态，内部是否置空
         fragments = new Fragment[4];
@@ -36,9 +36,18 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
 
             for (int i = 0; i < len; i++) {
                 //TODO FRAGMENT
-               fragments[i] = manager.findFragmentByTag("f"+i);
+                fragments[i] = manager.findFragmentByTag("f" + i);
             }
-        }else {
+            FragmentTransaction transaction = manager.beginTransaction();
+
+            for (int i = 0; i < fragments.length; i++) {
+                transaction
+                        .hide(fragments[i]);
+            }
+            transaction.show(fragments[0]);
+
+            transaction.commit();
+        } else {
             fragments[0] = new DiscoverFragment();
 
             fragments[1] = new CustomTingFragment();
@@ -56,38 +65,37 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
             }
             transaction.show(fragments[0]);
 
-            showingIndex=0;
-
             transaction.commit();
-
-            RadioGroup group = (RadioGroup) findViewById(R.id.main_tab_bar);
-
-            group.setOnCheckedChangeListener(this);
         }
+        showingIndex = 0;
+
+        RadioGroup group = (RadioGroup) findViewById(R.id.main_tab_bar);
+
+        group.setOnCheckedChangeListener(this);
 
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        int index=0;
-        switch (checkedId){
+        int index = 0;
+        switch (checkedId) {
             case R.id.main_tab_item_discover:
-                index=0;
+                index = 0;
                 break;
             case R.id.main_tab_item_custom:
-                index=1;
+                index = 1;
                 break;
             case R.id.main_tab_item_download:
-                index=2;
+                index = 2;
                 break;
             case R.id.main_tab_item_personal:
-                index=3;
+                index = 3;
                 break;
         }
-        if (manager != null&&index<fragments.length) {
+        if (manager != null && index < fragments.length) {
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.hide(fragments[showingIndex]).show(fragments[index]).commit();
-            showingIndex=index;
+            showingIndex = index;
         }
     }
 }
