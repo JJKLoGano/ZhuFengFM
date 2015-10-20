@@ -1,5 +1,10 @@
 package com.jjklogano.zufengfm.bean.DiscoverRecommend;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,6 +57,21 @@ public class SpecialColumns {
 
     public List<SpecialColumn> getList() {
         return list;
+    }
+
+    public void parseJson(JSONObject jsonObject) throws JSONException {
+        if (jsonObject != null) {
+            ret = jsonObject.getInt("ret");
+            title=  jsonObject.getString("title");
+            hasMore = jsonObject.getBoolean("hasMore");
+            list=new ArrayList<>();
+            JSONArray array = jsonObject.getJSONArray("list");
+            for (int i = 0; i < array.length(); i++) {
+                SpecialColumn specialColumn= new SpecialColumn();
+                specialColumn.parseJson(array.getJSONObject(i));
+                list.add(specialColumn);
+            }
+        }
     }
 
     public static class SpecialColumn {
@@ -127,6 +147,18 @@ public class SpecialColumns {
 
         public String getContentType() {
             return contentType;
+        }
+
+        public void parseJson(JSONObject jsonObject) throws JSONException {
+            if (jsonObject != null) {
+                columnType = jsonObject.getInt("columnType");
+                specialId = jsonObject.getInt("specialId");
+                title = jsonObject.getString("title");
+                subtitle = jsonObject.getString("subtitle");
+                footnote = jsonObject.getString("footnote");
+                coverPath = jsonObject.getString("coverPath");
+                contentType = jsonObject.getString("contentType");
+            }
         }
     }
 }

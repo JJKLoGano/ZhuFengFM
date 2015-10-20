@@ -1,5 +1,10 @@
 package com.jjklogano.zufengfm.bean.DiscoverRecommend;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,7 +49,19 @@ public class FocusImages {
         return list;
     }
 
-    //TODO PARSEJSON
+    public void parseJson(JSONObject jsonObject) throws JSONException {
+        if (jsonObject != null) {
+            ret = jsonObject.getInt("ret");
+            title = jsonObject.getString("title");
+            list=new ArrayList<>();
+            JSONArray array = jsonObject.getJSONArray("list");
+            for (int i = 0; i < array.length(); i++) {
+                FocusImage focusImage=new FocusImage();
+                focusImage.parseJson(array.getJSONObject(i));
+                list.add(focusImage);
+            }
+        }
+    }
 
     public static class FocusImage {
         /**
@@ -139,6 +156,18 @@ public class FocusImages {
 
         public boolean getIs_External_url() {
             return is_External_url;
+        }
+        public void parseJson(JSONObject jsonObject) throws JSONException {
+            if (jsonObject != null) {
+                id = jsonObject.getInt("id");
+                shortTitle = jsonObject.getString("shortTitle");
+                longTitle = jsonObject.getString("longTitle");
+                type = jsonObject.getInt("type");
+                specialId = jsonObject.getInt("specialId");
+                subType = jsonObject.getInt("subType");
+                isShare = jsonObject.getBoolean("isShare");
+                is_External_url = jsonObject.getBoolean("is_External_url");
+            }
         }
     }
 }
