@@ -1,21 +1,22 @@
-package com.jjklogano.zufengfm.fragments;
+package com.jjklogano.zufengfm.fragments.discover;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.jjklogano.zufengfm.R;
+import com.jjklogano.zufengfm.fragments.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CustomTingFragment extends Fragment {
+public class DiscoverRatingFragment extends BaseFragment {
 
 
-    public CustomTingFragment() {
+    public DiscoverRatingFragment() {
         // Required empty public constructor
     }
 
@@ -24,8 +25,12 @@ public class CustomTingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.custom_ting_fragment, container, false);
+        return inflater.inflate(R.layout.discover_rating_fragment, container, false);
     }
 
 
+    @Override
+    public String getFragmentTitle() {
+        return "榜单";
+    }
 }

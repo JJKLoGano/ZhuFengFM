@@ -1,4 +1,4 @@
-package com.jjklogano.zufengfm.Fragments;
+package com.jjklogano.zufengfm.fragments;
 
 
 import android.os.Bundle;
