@@ -12,15 +12,17 @@
         <!-- 应用程序日入口点！！！禁止改动！！！ -->
 
         <activity
-                android:name=".SplashActivity"
-                android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            android:name=".SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" >
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity android:name=".WelcomeActivity" >
         </activity>

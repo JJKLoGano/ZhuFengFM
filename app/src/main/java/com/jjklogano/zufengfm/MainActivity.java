@@ -6,10 +6,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.RadioGroup;
-import com.jjklogano.zufengfm.Fragments.CustomTingFragment;
-import com.jjklogano.zufengfm.Fragments.DiscoverFragment;
-import com.jjklogano.zufengfm.Fragments.DownloadTingFragment;
-import com.jjklogano.zufengfm.Fragments.PersonalFragment;
+import com.jjklogano.zufengfm.fragments.CustomTingFragment;
+import com.jjklogano.zufengfm.fragments.DiscoverFragment;
+import com.jjklogano.zufengfm.fragments.DownloadTingFragment;
+import com.jjklogano.zufengfm.fragments.PersonalFragment;
 
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
 
@@ -18,38 +18,52 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
      */
     private Fragment[] fragments;
     private FragmentManager manager;
+    private int showingIndex=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        fragments=new Fragment[4];
-
-        fragments[0]=new DiscoverFragment();
-
-        fragments[1] = new CustomTingFragment();
-
-        fragments[2] = new DownloadTingFragment();
-
-        fragments[3] = new PersonalFragment();
-
         manager =getSupportFragmentManager();
 
-        FragmentTransaction transaction = manager.beginTransaction();
+        //TODO 测试横竖屏切换数组对象状态，内部是否置空
+        fragments = new Fragment[4];
 
-        for (Fragment fragment : fragments) {
-            transaction
-                    .add(R.id.main_fragment_container, fragment)
-                    .hide(fragment);
+        if (savedInstanceState != null) {
+            //activity重新创建，还原fragment
+            int len = fragments.length;
+
+            for (int i = 0; i < len; i++) {
+                //TODO FRAGMENT
+               fragments[i] = manager.findFragmentByTag("f"+i);
+            }
+        }else {
+            fragments[0] = new DiscoverFragment();
+
+            fragments[1] = new CustomTingFragment();
+
+            fragments[2] = new DownloadTingFragment();
+
+            fragments[3] = new PersonalFragment();
+
+            FragmentTransaction transaction = manager.beginTransaction();
+
+            for (int i = 0; i < fragments.length; i++) {
+                transaction
+                        .add(R.id.main_fragment_container, fragments[i], "f" + i)
+                        .hide(fragments[i]);
+            }
+            transaction.show(fragments[0]);
+
+            showingIndex=0;
+
+            transaction.commit();
+
+            RadioGroup group = (RadioGroup) findViewById(R.id.main_tab_bar);
+
+            group.setOnCheckedChangeListener(this);
         }
-        transaction.show(fragments[0]);
-
-        transaction.commit();
-
-        RadioGroup group= (RadioGroup) findViewById(R.id.main_tab_bar);
-
-        group.setOnCheckedChangeListener(this);
 
     }
 
@@ -72,7 +86,8 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         }
         if (manager != null&&index<fragments.length) {
             FragmentTransaction transaction = manager.beginTransaction();
-            transaction.show(fragments[index]).commit();
+            transaction.hide(fragments[showingIndex]).show(fragments[index]).commit();
+            showingIndex=index;
         }
     }
 }
