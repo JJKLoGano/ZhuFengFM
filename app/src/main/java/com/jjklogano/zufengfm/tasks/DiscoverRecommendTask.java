@@ -22,7 +22,7 @@ public class DiscoverRecommendTask extends BaseTask {
     @Override
     protected TaskResult doInBackground(String... params) {
         TaskResult ret=new TaskResult();
-        JSONObject recommend = ClientAPI.getDiscoverCategories();
+        JSONObject recommend = ClientAPI.getDiscoverRecommends();
 
         ret.action= Constants.TASK_ACTION_DISCOVER_RECOMMNEND;
 
