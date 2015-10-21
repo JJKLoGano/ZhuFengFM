@@ -27,9 +27,34 @@ public class ClientAPI {
      * @return 分类详情
      */
     public static JSONObject getDiscoverCategories(){
-        JSONObject ret=null;
+        JSONObject ret=getData("/mobile/discovery/v1/categories?device=android&picVersion=10&scale=2");
+        return ret;
+    }
 
-        byte[] data = HttpTools.doGet(API_POINT + "/mobile/discovery/v1/categories?device=android&picVersion=10&scale=2");
+    /**
+     * 获取发现部分
+     *
+     * API  /mobile/discovery/v1/recommends?channel=and-f6&device=android&includeActivity=true&includeSpecial=true&scale=2&version=4.1.7.1
+     * @param channel  渠道
+     * @param includeActivity  是否包含活动
+     * @param includeSpecial 是否包含精品听单
+     * @return 返回数据
+     */
+    public static JSONObject getDiscoverRecommends(String channel,boolean includeActivity,boolean includeSpecial){
+        if (channel != null) {
+            channel = "and-f6";
+        }
+        JSONObject ret=getData("mobile/discovery/v1/recommends?"
+                +"channel=" +channel
+                +"&device=android&includeActivity=" +includeActivity
+                +"&includeSpecial=" +includeSpecial
+                +"&scale=2&version=4.1.7.1");
+        return ret;
+    }
+
+    private static JSONObject getData(String path){
+        JSONObject ret=null;
+        byte[] data = HttpTools.doGet(API_POINT + path);
 
         if (data != null) {
             try {
@@ -40,5 +65,7 @@ public class ClientAPI {
             }
         }
         return ret;
+
     }
+
 }

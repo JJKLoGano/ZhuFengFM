@@ -1,4 +1,4 @@
-package com.jjklogano.zufengfm.bean.DiscoverRecommend;
+package com.jjklogano.zufengfm.bean.discoverRecommend;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +13,7 @@ import java.util.List;
  * Email : mengpangzhi@hotmial.com<br/>
  * Date : 2015/10/20<br/>
  */
-public class DiscoveryColumns {
+public class DiscoveryColumns extends DiscoverRecommendItem{
 
 
     /**
@@ -22,19 +22,9 @@ public class DiscoveryColumns {
      * list : [{"id":1,"orderNum":2,"title":"听友圈子","subtitle":"玩个游戏呗 格式：回答楼上问题+想问楼下问题","coverPath":"http://fdfs.xmcdn.com/group9/M07/1C/8C/wKgDYlV3rd2zGc9PAAAgRAu1VLU052.png","contentType":"xzone","url":"","sharePic":"","enableShare":false,"contentUpdatedAt":0},{"id":2,"orderNum":1,"title":"活动","subtitle":"百度地图\u2014寻找最美女声","coverPath":"http://fdfs.xmcdn.com/group9/M07/1C/8C/wKgDYlV3reewe4kXAAAUNfIrwHU252.png","contentType":"activity","url":"","sharePic":"","enableShare":false,"isHot":true,"contentUpdatedAt":0},{"id":3,"orderNum":3,"title":"新声活商城","subtitle":"各种新奇的有声智能硬件","coverPath":"http://fdfs.xmcdn.com/group9/M07/1C/8D/wKgDYlV3rfDRIBojAAAVB1veXSo547.png","contentType":"html5.mall","url":"http://www.wemart.cn/v2/weimao/index.html?disableCache=true&shopId=shop000201506058853#mad/shop000201506058853/39","sharePic":"http://fdfs.xmcdn.com/group9/M07/1C/A6/wKgDZlV3rfqDOg0lAAAVB1veXSo522.png","enableShare":true,"isExternalUrl":true,"contentUpdatedAt":1436751267000},{"id":4,"orderNum":4,"title":"酷音铃声","subtitle":"千万条精品铃声快来下载吧","coverPath":"http://fdfs.xmcdn.com/group9/M07/1C/8D/wKgDYlV3rfvCtVcOAAAVglTbKTU541.png","contentType":"html5.audio","url":"http://m.diyring.cc/friend/d450780628b741f1","sharePic":"http://fdfs.xmcdn.com/group15/M00/1C/B5/wKgDZVV3ri7wl9faAAAVglTbKTU535.png","enableShare":true,"isExternalUrl":true,"contentUpdatedAt":0}]
      * locationInHotRecommend : 0
      */
-
-    private int ret;
-    private String title;
     private int locationInHotRecommend;
     private List<DiscoveryColumn> list;
 
-    public void setRet(int ret) {
-        this.ret = ret;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public void setLocationInHotRecommend(int locationInHotRecommend) {
         this.locationInHotRecommend = locationInHotRecommend;
@@ -44,13 +34,6 @@ public class DiscoveryColumns {
         this.list = list;
     }
 
-    public int getRet() {
-        return ret;
-    }
-
-    public String getTitle() {
-        return title;
-    }
 
     public int getLocationInHotRecommend() {
         return locationInHotRecommend;
@@ -63,8 +46,7 @@ public class DiscoveryColumns {
 
     public void parseJson(JSONObject jsonObject) throws JSONException {
         if (jsonObject != null) {
-            ret = jsonObject.getInt("ret");
-            title = jsonObject.getString("title");
+            super.parseJson(jsonObject);
             locationInHotRecommend  =jsonObject.getInt("locationInHotRecommend");
             JSONArray array = jsonObject.getJSONArray("list");
             list = new ArrayList<>();

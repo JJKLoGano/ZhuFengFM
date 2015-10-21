@@ -1,4 +1,4 @@
-package com.jjklogano.zufengfm.bean.DiscoverRecommend;
+package com.jjklogano.zufengfm.bean.discoverRecommend;
 
 import org.json.JSONArray;
 import org.json.JSONException;

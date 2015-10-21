@@ -1,4 +1,4 @@
-package com.jjklogano.zufengfm.bean.DiscoverRecommend;
+package com.jjklogano.zufengfm.bean.discoverRecommend;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,7 +9,7 @@ import org.json.JSONObject;
  * Email : mengpangzhi@hotmial.com<br/>
  * Date : 2015/10/20<br/>
  */
-public class DiscoverRecomend {
+public class DiscoverRecommend {
 
     public Entrances entrances;
     public DiscoveryColumns discoveryColumns;

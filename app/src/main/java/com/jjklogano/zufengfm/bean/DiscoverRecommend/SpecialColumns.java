@@ -1,4 +1,4 @@
-package com.jjklogano.zufengfm.bean.DiscoverRecommend;
+package com.jjklogano.zufengfm.bean.discoverRecommend;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +13,7 @@ import java.util.List;
  * Email : mengpangzhi@hotmial.com<br/>
  * Date : 2015/10/20<br/>
  */
-public class SpecialColumns {
+public class SpecialColumns extends DiscoverRecommendItem{
 
     /**
      * ret : 0
@@ -21,39 +21,13 @@ public class SpecialColumns {
      * hasMore : true
      * list : [{"columnType":1,"specialId":341,"title":"10首一听就沦陷的翻唱歌曲","subtitle":"不是每","footnote":"10首声音","coverPath":"http","contentType":"2"},{"columnType":1,"specialId":407,"title":"6大魔幻小说遇上传统评书","subtitle":"当","footnote":"6首声音","coverPath":"http","contentType":"2"}]
      */
-
-    private int ret;
-    private String title;
-    private boolean hasMore;
     private List<SpecialColumn> list;
 
-    public void setRet(int ret) {
-        this.ret = ret;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setHasMore(boolean hasMore) {
-        this.hasMore = hasMore;
-    }
 
     public void setList(List<SpecialColumn> list) {
         this.list = list;
     }
 
-    public int getRet() {
-        return ret;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public boolean getHasMore() {
-        return hasMore;
-    }
 
     public List<SpecialColumn> getList() {
         return list;
@@ -61,9 +35,7 @@ public class SpecialColumns {
 
     public void parseJson(JSONObject jsonObject) throws JSONException {
         if (jsonObject != null) {
-            ret = jsonObject.getInt("ret");
-            title=  jsonObject.getString("title");
-            hasMore = jsonObject.getBoolean("hasMore");
+            super.parseJson(jsonObject);
             list=new ArrayList<>();
             JSONArray array = jsonObject.getJSONArray("list");
             for (int i = 0; i < array.length(); i++) {

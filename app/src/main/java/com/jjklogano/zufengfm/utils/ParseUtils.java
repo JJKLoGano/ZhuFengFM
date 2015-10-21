@@ -2,6 +2,7 @@ package com.jjklogano.zufengfm.utils;
 
 import com.jjklogano.zufengfm.Constants;
 import com.jjklogano.zufengfm.bean.DiscoverCategory;
+import com.jjklogano.zufengfm.bean.discoverRecommend.DiscoverRecommend;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,7 +21,7 @@ public class ParseUtils {
 
 
     public static List<DiscoverCategory> parseDiscoverCategories(JSONObject jsonObject){
-        List<DiscoverCategory> ret = null;
+         List<DiscoverCategory> ret = null;
         if (jsonObject != null) {
             try {
                 int code = jsonObject.getInt("ret");
@@ -46,8 +47,19 @@ public class ParseUtils {
         return ret;
     }
 
-    public static Object parseDiscoverRecommend(JSONObject recommend) {
-        //TODO 完善该方法
-        return null;
+    public static DiscoverRecommend parseDiscoverRecommend(JSONObject jsonObject) {
+        DiscoverRecommend ret = null;
+        if (jsonObject != null) {
+            try {
+                int code = jsonObject.getInt("ret");
+                if (code == Constants.TASK_RESULT_OK){
+                    ret=new DiscoverRecommend();
+                    ret.parseJson(jsonObject);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return ret;
     }
 }

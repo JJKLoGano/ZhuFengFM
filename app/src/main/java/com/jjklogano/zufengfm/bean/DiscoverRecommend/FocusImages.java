@@ -1,4 +1,4 @@
-package com.jjklogano.zufengfm.bean.DiscoverRecommend;
+package com.jjklogano.zufengfm.bean.discoverRecommend;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +13,7 @@ import java.util.List;
  * Email : mengpangzhi@hotmial.com<br/>
  * Date : 2015/10/20<br/>
  */
-public class FocusImages {
+public class FocusImages extends  DiscoverRecommendItem{
 
     /**
      * ret : 0
@@ -21,28 +21,10 @@ public class FocusImages {
      * title : 焦点图
      */
 
-    private int ret;
-    private String title;
     private List<FocusImage> list;
-
-    public void setRet(int ret) {
-        this.ret = ret;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public void setList(List<FocusImage> list) {
         this.list = list;
-    }
-
-    public int getRet() {
-        return ret;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public List<FocusImage> getList() {
@@ -51,8 +33,7 @@ public class FocusImages {
 
     public void parseJson(JSONObject jsonObject) throws JSONException {
         if (jsonObject != null) {
-            ret = jsonObject.getInt("ret");
-            title = jsonObject.getString("title");
+            super.parseJson(jsonObject);
             list=new ArrayList<>();
             JSONArray array = jsonObject.getJSONArray("list");
             for (int i = 0; i < array.length(); i++) {
