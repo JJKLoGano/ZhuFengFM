@@ -42,7 +42,9 @@ public class DiscoverRecommend {
     public List<DiscoverRecommendItem> getItemList(){
         List<DiscoverRecommendItem> items= new ArrayList<>();
         items.add(editorRecommendAlbums);
-        items.add(hotRecommends);
+        items.add(specialColumn);
+        items.add(discoveryColumns);
+        items.addAll(hotRecommends.getList());
         return items;
     }
 

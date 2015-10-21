@@ -82,7 +82,7 @@ public class DiscoverRecommendFragment extends BaseFragment implements TaskCallB
                     Object data = result.data;
                     if (data != null && data instanceof DiscoverRecommend) {
                         items.clear();
-                        items = ((DiscoverRecommend)data).getItemList();
+                        items.addAll(((DiscoverRecommend)data).getItemList());
                         adapter.notifyDataSetChanged();
                         Log.d("recommend", "List = " + data.toString());
                     }
