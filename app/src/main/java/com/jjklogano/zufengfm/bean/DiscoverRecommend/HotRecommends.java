@@ -13,7 +13,7 @@ import java.util.List;
  * Email : mengpangzhi@hotmial.com<br/>
  * Date : 2015/10/20<br/>
  */
-public class HotRecommends  extends DiscoverRecommendItem{
+public class HotRecommends extends DiscoverRecommendItem{
 
     private List<Recommends> list;
 

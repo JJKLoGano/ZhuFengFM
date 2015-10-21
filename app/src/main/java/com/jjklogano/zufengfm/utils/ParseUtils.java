@@ -49,6 +49,7 @@ public class ParseUtils {
 
     public static DiscoverRecommend parseDiscoverRecommend(JSONObject jsonObject) {
         DiscoverRecommend ret = null;
+
         if (jsonObject != null) {
             try {
                 int code = jsonObject.getInt("ret");
@@ -60,6 +61,7 @@ public class ParseUtils {
                 e.printStackTrace();
             }
         }
+
         return ret;
     }
 }

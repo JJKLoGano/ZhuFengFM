@@ -144,10 +144,10 @@ public class FocusImages extends  DiscoverRecommendItem{
                 shortTitle = jsonObject.getString("shortTitle");
                 longTitle = jsonObject.getString("longTitle");
                 type = jsonObject.getInt("type");
-                specialId = jsonObject.getInt("specialId");
-                subType = jsonObject.getInt("subType");
-                isShare = jsonObject.getBoolean("isShare");
-                is_External_url = jsonObject.getBoolean("is_External_url");
+                specialId = jsonObject.optInt("specialId");
+                subType = jsonObject.optInt("subType");
+                isShare = jsonObject.optBoolean("isShare");
+                is_External_url = jsonObject.optBoolean("is_External_url");
             }
         }
     }

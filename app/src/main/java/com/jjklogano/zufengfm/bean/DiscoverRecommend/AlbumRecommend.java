@@ -10,6 +10,10 @@ import org.json.JSONObject;
  * Email : mengpangzhi@hotmial.com<br/>
  * Date : 2015/10/20<br/>
  */
+
+/**
+ * 专辑推荐单项，被小编推荐、热门推荐中的子项使用
+ */
 public class AlbumRecommend extends AlbumBasic{
 
     /**

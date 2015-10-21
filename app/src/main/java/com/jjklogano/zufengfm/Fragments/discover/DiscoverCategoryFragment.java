@@ -44,9 +44,9 @@ public class DiscoverCategoryFragment extends BaseFragment implements TaskCallBa
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onResume() {
+        super.onResume();
         initData();
-        super.onCreate(savedInstanceState);
     }
 
     private void initData() {

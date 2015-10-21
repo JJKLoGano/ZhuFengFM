@@ -3,6 +3,9 @@ package com.jjklogano.zufengfm.bean.discoverRecommend;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created<br/>
  * Author : LoGano(贾璟琨)<br/>
@@ -36,5 +39,22 @@ public class DiscoverRecommend {
         }
     }
 
+    public List<DiscoverRecommendItem> getItemList(){
+        List<DiscoverRecommendItem> items= new ArrayList<>();
+        items.add(editorRecommendAlbums);
+        items.add(hotRecommends);
+        return items;
+    }
 
+    @Override
+    public String toString() {
+        return "DiscoverRecommend{" +
+                "entrances=" + entrances +
+                ", discoveryColumns=" + discoveryColumns +
+                ", editorRecommendAlbums=" + editorRecommendAlbums +
+                ", hotRecommends=" + hotRecommends +
+                ", focusImages=" + focusImages +
+                ", specialColumn=" + specialColumn +
+                '}';
+    }
 }

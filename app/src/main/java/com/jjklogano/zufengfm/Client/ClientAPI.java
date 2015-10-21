@@ -44,7 +44,7 @@ public class ClientAPI {
         if (channel != null) {
             channel = "and-f6";
         }
-        JSONObject ret=getData("mobile/discovery/v1/recommends?"
+        JSONObject ret=getData("/mobile/discovery/v1/recommends?"
                 +"channel=" +channel
                 +"&device=android&includeActivity=" +includeActivity
                 +"&includeSpecial=" +includeSpecial

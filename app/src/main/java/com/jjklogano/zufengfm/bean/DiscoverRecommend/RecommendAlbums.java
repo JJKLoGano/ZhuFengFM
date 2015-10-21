@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class RecommendAlbums extends DiscoverRecommendItem {
 
-
     /**
      * ret : 0
      * title : 小编推荐
