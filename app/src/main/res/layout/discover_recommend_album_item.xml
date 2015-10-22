@@ -38,7 +38,7 @@
                 <ImageView
                         android:id="@+id/discover_recommend_album_item_icon_0"
                         android:layout_width="match_parent"
-                        android:layout_height="104dp"
+                        android:layout_height="@dimen/discover_recommend_album_item_height"
                         android:background="@mipmap/album_cover_bg"
                         />
                 <TextView
@@ -74,7 +74,7 @@
                 <ImageView
                         android:id="@+id/discover_recommend_album_item_icon_1"
                         android:layout_width="match_parent"
-                        android:layout_height="104dp"
+                        android:layout_height="@dimen/discover_recommend_album_item_height"
                         android:background="@mipmap/album_cover_bg"
                         />
                 <TextView
@@ -109,7 +109,7 @@
                 <ImageView
                         android:id="@+id/discover_recommend_album_item_icon_2"
                         android:layout_width="match_parent"
-                        android:layout_height="104dp"
+                        android:layout_height="@dimen/discover_recommend_album_item_height"
                         android:background="@mipmap/album_cover_bg"
                         />
                 <TextView

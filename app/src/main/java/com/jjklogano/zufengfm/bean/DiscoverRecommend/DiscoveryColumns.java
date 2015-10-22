@@ -72,7 +72,7 @@ public class DiscoveryColumns extends DiscoverRecommendItem{
          * contentUpdatedAt : 0
          */
 
-        private int id;
+        private long id;
         private int orderNum;
         private String title;
         private String subtitle;
@@ -83,7 +83,7 @@ public class DiscoveryColumns extends DiscoverRecommendItem{
         private boolean enableShare;
         private int contentUpdatedAt;
 
-        public void setId(int id) {
+        public void setId(long id) {
             this.id = id;
         }
 
@@ -123,7 +123,7 @@ public class DiscoveryColumns extends DiscoverRecommendItem{
             this.contentUpdatedAt = contentUpdatedAt;
         }
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
@@ -165,7 +165,7 @@ public class DiscoveryColumns extends DiscoverRecommendItem{
 
         public void parseJson(JSONObject jsonObject) throws JSONException {
             if (jsonObject != null) {
-                id = jsonObject.getInt("id");
+                id = jsonObject.getLong("id");
                 orderNum = jsonObject.getInt("orderNum");
                 title = jsonObject.getString("title");
                 subtitle = jsonObject.getString("subtitle");

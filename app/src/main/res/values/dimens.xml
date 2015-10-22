@@ -3,4 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="discover_recommend_list_divider_height">10dp</dimen>
+    <dimen name="discover_recommend_album_item_height">112dp</dimen>
+    <dimen name="discover_recommend_discover_item_width">64dp</dimen>
+    <dimen name="discover_recommend_discover_item_height">64dp</dimen>
 </resources>

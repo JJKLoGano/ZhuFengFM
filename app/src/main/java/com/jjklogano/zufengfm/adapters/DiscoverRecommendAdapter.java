@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.jjklogano.zufengfm.R;
 import com.jjklogano.zufengfm.bean.discoverRecommend.*;
+import com.jjklogano.zufengfm.fragments.discover.DiscoverRecommendFragment;
 import com.jjklogano.zufengfm.tasks.AsyncDrawable;
 import com.jjklogano.zufengfm.tasks.ImageLoadTask;
 
@@ -32,7 +33,9 @@ public class DiscoverRecommendAdapter extends BaseAdapter {
     private static final int TYPE_RECOMMENDALBUMS = 0;
     private static final int TYPE_DISCOVERYCOLUMNS = 1;
     private static final int TYPE_SPECIALCOLUMS = 2;
-    private static final int TYPE_HOTRECOMMENDS = 0;
+
+
+    private View.OnClickListener onAlbumClickListener;
 
 
     private Context context;
@@ -99,9 +102,6 @@ public class DiscoverRecommendAdapter extends BaseAdapter {
         }else if(item instanceof SpecialColumns){//精品听单
             view = bindSpecialView(position, convertView, parent);
         }
-//        else if(item instanceof HotRecommends.Recommends){//精品听单
-//            view = bindAlbumsView(position, convertView, parent);
-//        }
         return view;
     }
 
@@ -182,6 +182,8 @@ public class DiscoverRecommendAdapter extends BaseAdapter {
             AlbumRecommend albumRecommend = list.get(i);
 
             loadImage(holder.albumIcons[i],albumRecommend.getCoverLarge());
+            holder.albumIcons[i].setOnClickListener(onAlbumClickListener);
+            holder.albumIcons[i].setTag(albumRecommend);
 
             holder.albumNames[i].setText(albumRecommend.getTitle());
             holder.trackNames[i].setText(albumRecommend.getTrackTitle());
@@ -228,7 +230,7 @@ public class DiscoverRecommendAdapter extends BaseAdapter {
         for (int i = 0; i < 4; i++) {
             DiscoveryColumns.DiscoveryColumn discoveryColumn = list.get(i);
 
-            loadImage(holder.discoverIcons[i],discoveryColumn.getCoverPath());
+            loadImage(holder.discoverIcons[i], discoveryColumn.getCoverPath());
 
             holder.discoverTitles[i].setText(discoveryColumn.getTitle());
             holder.subTitles[i].setText(discoveryColumn.getSubtitle());
@@ -285,7 +287,9 @@ public class DiscoverRecommendAdapter extends BaseAdapter {
         }
         return view;
     }
-
+    public void setOnAlbumClickListener(View.OnClickListener onClickListener) {
+        this.onAlbumClickListener = onClickListener;
+    }
 
 
     /**

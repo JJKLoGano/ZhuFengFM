@@ -58,7 +58,7 @@ public class SpecialColumns extends DiscoverRecommendItem{
          */
 
         private int columnType;
-        private int specialId;
+        private long specialId;
         private String title;
         private String subtitle;
         private String footnote;
@@ -69,7 +69,7 @@ public class SpecialColumns extends DiscoverRecommendItem{
             this.columnType = columnType;
         }
 
-        public void setSpecialId(int specialId) {
+        public void setSpecialId(long specialId) {
             this.specialId = specialId;
         }
 
@@ -97,7 +97,7 @@ public class SpecialColumns extends DiscoverRecommendItem{
             return columnType;
         }
 
-        public int getSpecialId() {
+        public long getSpecialId() {
             return specialId;
         }
 
@@ -124,7 +124,7 @@ public class SpecialColumns extends DiscoverRecommendItem{
         public void parseJson(JSONObject jsonObject) throws JSONException {
             if (jsonObject != null) {
                 columnType = jsonObject.getInt("columnType");
-                specialId = jsonObject.getInt("specialId");
+                specialId = jsonObject.getLong("specialId");
                 title = jsonObject.getString("title");
                 subtitle = jsonObject.getString("subtitle");
                 footnote = jsonObject.getString("footnote");

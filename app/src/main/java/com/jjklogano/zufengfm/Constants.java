@@ -23,4 +23,7 @@ public class Constants {
     public static final int TASK_ACTION_DISCOVER_CATEGORIES = 1;
     public static final int TASK_ACTION_DISCOVER_RECOMMNEND = 2;
 
+
+    public static final String TAG_DISCOVER_RECOMMENDS_ALBUM= "albumRecommend:";
+
 }

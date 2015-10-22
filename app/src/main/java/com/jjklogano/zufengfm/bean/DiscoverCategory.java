@@ -12,7 +12,7 @@ import org.json.JSONObject;
  * Email : mengpangzhi@hotmial.com<br/>
  * Date : 2015/10/19<br/>
  */
-public class DiscoverCategory {
+public class DiscoverCategory implements Parsable{
 
 
     /**
@@ -37,7 +37,7 @@ public class DiscoverCategory {
     private boolean isFinished;
     private String contentType;
 
-
+    @Override
     public void parseJson(JSONObject jsonObject) throws JSONException {
         if (jsonObject != null) {
             id = jsonObject.getInt("id");

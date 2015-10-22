@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -58,5 +59,15 @@ public class DiscoverRecommend {
                 ", focusImages=" + focusImages +
                 ", specialColumn=" + specialColumn +
                 '}';
+    }
+
+
+    public List<String> getImageList() {
+        List<String> images = new ArrayList<>();
+        focusImages.getList();
+        for (FocusImages.FocusImage focusImage : focusImages.getList()) {
+            images.add(focusImage.getPic());
+        }
+        return null;
     }
 }

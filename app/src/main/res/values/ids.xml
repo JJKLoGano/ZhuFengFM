@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="special_item_icon"/>
+    <item type="id" name="special_item_title"/>
+    <item type="id" name="special_item_subtitle"/>
+    <item name="special_item_footnote" type="id"/>
+    <item name="special_item_arrowmore" type="id"/>
+</resources>

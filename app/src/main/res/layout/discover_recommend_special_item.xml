@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:padding="16dp"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="#fff"
-              android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+        >
+
     <TextView
             android:id="@+id/discover_recommend_special_item_title"
             android:layout_width="wrap_content"
@@ -12,6 +14,7 @@
             android:text="分类标题"
             android:drawableLeft="@mipmap/finding_title_tag"
             />
+
     <TextView
             android:id="@+id/discover_recommend_special_item_more"
             android:layout_width="wrap_content"
@@ -21,6 +24,7 @@
             android:text="更多"
             android:drawableLeft="@mipmap/arrow_right"
             />
+
     <RelativeLayout
             android:id="@+id/discover_recommend_special_item_child_0"
             android:layout_width="match_parent"
@@ -28,6 +32,7 @@
             android:layout_marginTop="8dp"
             android:layout_below="@id/discover_recommend_special_item_title"
             >
+
         <ImageView
                 android:id="@+id/discover_recommend_special_item_icon_0"
                 android:layout_width="64dp"
@@ -35,6 +40,7 @@
                 android:layout_marginRight="8dp"
                 android:src="@mipmap/album_cover_bg"
                 />
+
         <TextView
                 android:layout_toRightOf="@+id/discover_recommend_special_item_icon_0"
                 android:id="@+id/discover_recommend_special_item_title_0"
@@ -46,6 +52,7 @@
                 android:singleLine="true"
                 android:ellipsize="end"
                 />
+
         <TextView
                 android:layout_toRightOf="@id/discover_recommend_special_item_icon_0"
                 android:layout_below="@id/discover_recommend_special_item_title_0"
@@ -57,6 +64,7 @@
                 android:singleLine="true"
                 android:ellipsize="end"
                 />
+
         <TextView
                 android:layout_toRightOf="@id/discover_recommend_special_item_icon_0"
                 android:layout_below="@id/discover_recommend_special_item_subtitle_0"
@@ -69,7 +77,17 @@
                 android:singleLine="true"
                 android:ellipsize="end"
                 />
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/discover_recommend_special_item_icon_0"
+                android:layout_alignBottom="@id/discover_recommend_special_item_icon_0"
+                android:layout_below="@id/discover_recommend_special_item_count_0"
+                android:src="@mipmap/follow_item_selected"
+                />
     </RelativeLayout>
+
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,6 +95,7 @@
             android:id="@+id/discover_recommend_special_item_child_1"
             android:layout_below="@id/discover_recommend_special_item_child_0"
             >
+
         <ImageView
                 android:id="@+id/discover_recommend_special_item_icon_1"
                 android:layout_width="64dp"
@@ -84,6 +103,7 @@
                 android:layout_marginRight="8dp"
                 android:src="@mipmap/album_cover_bg"
                 />
+
         <TextView
                 android:layout_toRightOf="@+id/discover_recommend_special_item_icon_1"
                 android:id="@+id/discover_recommend_special_item_title_1"
@@ -95,6 +115,7 @@
                 android:singleLine="true"
                 android:ellipsize="end"
                 />
+
         <TextView
                 android:layout_toRightOf="@id/discover_recommend_special_item_icon_1"
                 android:layout_below="@id/discover_recommend_special_item_title_1"
@@ -106,6 +127,7 @@
                 android:singleLine="true"
                 android:ellipsize="end"
                 />
+
         <TextView
                 android:layout_toRightOf="@id/discover_recommend_special_item_icon_1"
                 android:layout_below="@id/discover_recommend_special_item_subtitle_1"
