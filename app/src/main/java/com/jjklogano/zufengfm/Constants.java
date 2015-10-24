@@ -23,9 +23,16 @@ public class Constants {
     public static final int TASK_ACTION_DISCOVER_CATEGORIES = 1;
     public static final int TASK_ACTION_DISCOVER_RECOMMNEND = 2;
     public static final int TASK_ACTION_ALBUM_DETAIL = 3;
+    public static final int TASK_ACTION_ALBUM_DETAIL_REFRESH=4;
 
 
 
     public static final String TAG_DISCOVER_RECOMMENDS_ALBUM= "albumRecommend:";
 
+
+    //服务启动类别
+    public static final int SERVICE_START_TYPE_NULL = 0;
+    public static final int SERVICE_START_TYPE_PLAY = 1;
+    public static final int SERVICE_START_TYPE_CHANGE_STATUS = 2;
+            ;
 }

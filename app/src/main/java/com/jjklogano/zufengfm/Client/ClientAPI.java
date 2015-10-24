@@ -67,6 +67,14 @@ public class ClientAPI {
                 + "/20?device=android&pageSize=20&albumId="
                 + albumId
                 + "&isAsc=true");
+
+        Log.d("url","/mobile/others/ca/album/track/"
+                + albumId
+                + "/true/"
+                + pageNum
+                + "/20?device=android&pageSize=20&albumId="
+                + albumId
+                + "&isAsc=true");
         return ret;
     }
 

@@ -27,10 +27,15 @@ public class AlbumDetailTask extends BaseTask {
         long albumId = attrs.getLong("albumId");
         long trackId = attrs.getLong("trackId");
         int pageNum = attrs.getInt("pageNum");
+        boolean isRefresh = attrs.getBoolean("isRefresh",false);
 
         JSONObject categories = ClientAPI.getAlbumDetails(albumId,trackId,pageNum);
 
-        ret.action = Constants.TASK_ACTION_ALBUM_DETAIL;
+        if(isRefresh) {
+            ret.action = Constants.TASK_ACTION_ALBUM_DETAIL_REFRESH;
+        } else{
+            ret.action = Constants.TASK_ACTION_ALBUM_DETAIL;
+        }
 
         if (categories != null) {
             try {

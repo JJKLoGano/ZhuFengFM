@@ -1,5 +1,7 @@
 package com.jjklogano.zufengfm.bean.albumdetails;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -9,7 +11,7 @@ import org.json.JSONObject;
  * Email : mengpangzhi@hotmial.com<br/>
  * Date : 2015/10/23<br/>
  */
-public class AlbumTrack {
+public class AlbumTrack implements Parcelable{
 
     /**
      * trackId : 9387933
@@ -392,4 +394,49 @@ public class AlbumTrack {
             downloadAacSize = jsonObject.getInt("downloadAacSize");
         }
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(albumId);
+        dest.writeInt(trackId);
+        dest.writeString(title);
+        dest.writeString(coverMiddle);
+        dest.writeInt(duration);
+        dest.writeString(playUrl32);
+
+
+    }
+
+    public static final Parcelable.Creator<AlbumTrack> CREATOR = new Parcelable.Creator<AlbumTrack>()
+    {
+        public AlbumTrack createFromParcel(Parcel in)
+        {
+            return new AlbumTrack(in);
+        }
+
+        public AlbumTrack[] newArray(int size)
+        {
+            return new AlbumTrack[size];
+        }
+    };
+
+    public AlbumTrack() {
+    }
+
+    private AlbumTrack(Parcel parcel){
+        albumId = parcel.readInt();
+        trackId = parcel.readInt();
+        title = parcel.readString();
+        coverMiddle = parcel.readString();
+        duration = parcel.readInt();
+        playUrl32 = parcel.readString();
+    }
+
+
+
 }

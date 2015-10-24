@@ -1,20 +1,19 @@
 package com.jjklogano.zufengfm;
 
+import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import com.jjklogano.zufengfm.adapters.AlbumDeailAdapter;
 import com.jjklogano.zufengfm.bean.albumdetails.AlbumDetail;
 import com.jjklogano.zufengfm.bean.albumdetails.AlbumTrack;
@@ -28,19 +27,21 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlbumDetailActivity extends AppCompatActivity implements TaskCallBack ,AppBarLayout.OnOffsetChangedListener {
+public class AlbumDetailActivity extends AppCompatActivity implements TaskCallBack ,AppBarLayout.OnOffsetChangedListener, SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener, CompoundButton.OnCheckedChangeListener {
 
     private SwipeRefreshLayout refreshLayout;
     private AppBarLayout appBarLayout;
     private ListView listView;
 
-    private List<AlbumTrack> tracks;
+    private ArrayList<AlbumTrack> tracks;
 
     private int pageNum=1;
     private AlbumDeailAdapter adapter;
     private ImageView imgCover;
     private TextView textTilte;
     private TextView textSubTilte;
+    private Bundle attrs;
+    private CheckBox playButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +59,12 @@ public class AlbumDetailActivity extends AppCompatActivity implements TaskCallBa
 
         listView.setAdapter(adapter);
 
-        Bundle attrs = getIntent().getBundleExtra("trackInfo");
+        attrs = getIntent().getBundleExtra("trackInfo");
         if (attrs != null) {
-            attrs.putInt("pageNum",pageNum);
+            attrs.putInt("pageNum", pageNum);
+            attrs.putBoolean("isRefresh", false);
         }
-        new AlbumDetailTask(this,attrs).execute();
+        new AlbumDetailTask(this, attrs).execute();
     }
 
 
@@ -90,21 +92,29 @@ public class AlbumDetailActivity extends AppCompatActivity implements TaskCallBa
         textTilte = (TextView) findViewById(R.id.album_detail_title);
         textSubTilte = (TextView) findViewById(R.id.album_detail_subtitle);
 
-
         listView = (ListView) findViewById(R.id.album_detail_list);
+
+        listView.setOnItemClickListener(this);
 
         appBarLayout = (AppBarLayout) findViewById(R.id.album_detail_appbar);
 
         //为swipeRefreshLayout 添加冲突处理
-        SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) findViewById(R.id.album_detail_refresh);
+        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.album_detail_refresh);
 
+        refreshLayout.setOnRefreshListener(this);
 
+        playButton = (CheckBox) findViewById(R.id.album_detail_play_btn);
+
+        playButton.setOnCheckedChangeListener(this);
     }
 
     @Override
     public void onTaskFinished(TaskResult result) {
         AlbumDetail albumDetail = (AlbumDetail) result.data;
-        tracks.clear();
+
+        if (result.action == Constants.TASK_ACTION_ALBUM_DETAIL)
+            tracks.clear();
+
         this.tracks.addAll(albumDetail.getTracks());
         adapter.notifyDataSetChanged();
 
@@ -112,10 +122,62 @@ public class AlbumDetailActivity extends AppCompatActivity implements TaskCallBa
         textTilte.setText(albumDetail.getTitle());
         textSubTilte.setText(albumDetail.getIntro());
 
+        if(refreshLayout.isRefreshing()){
+            refreshLayout.setRefreshing(false);
+        }
+
     }
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+        refreshLayout.setEnabled(verticalOffset == 0);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        appBarLayout.addOnOffsetChangedListener(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        appBarLayout.removeOnOffsetChangedListener(this);
+    }
+
+    @Override
+    public void onRefresh() {
+        if (attrs != null) {
+            attrs.putInt("pageNum", ++pageNum);
+            attrs.putBoolean("isRefresh",true);
+        }
+        new AlbumDetailTask(this, attrs).execute();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(AlbumDetailActivity.this,MusicService.class);
+
+        Bundle attrs = new Bundle();
+        attrs.putInt("startType",Constants.SERVICE_START_TYPE_PLAY);
+        attrs.putInt("playIndex",position);
+        attrs.putParcelableArrayList("tracks", tracks);
+
+        intent.putExtra("attrs", attrs);
+
+        startService(intent);
+
+        playButton.setChecked(true);
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            Intent intent = new Intent(AlbumDetailActivity.this,MusicService.class);
+
+            Bundle attrs = new Bundle();
+            attrs.putInt("startType",Constants.SERVICE_START_TYPE_PLAY);
+            intent.putExtra("attrs", attrs);
+
+            startService(intent);
     }
 }
