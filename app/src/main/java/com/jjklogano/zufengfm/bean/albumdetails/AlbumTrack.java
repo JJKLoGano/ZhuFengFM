@@ -408,6 +408,8 @@ public class AlbumTrack implements Parcelable{
         dest.writeString(coverMiddle);
         dest.writeInt(duration);
         dest.writeString(playUrl32);
+        dest.writeString(playUrl64);
+
 
 
     }
@@ -435,6 +437,7 @@ public class AlbumTrack implements Parcelable{
         coverMiddle = parcel.readString();
         duration = parcel.readInt();
         playUrl32 = parcel.readString();
+        playUrl64 = parcel.readString();
     }
 
 

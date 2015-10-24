@@ -8,19 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.jjklogano.zufengfm.Constants;
 import com.jjklogano.zufengfm.R;
+import com.jjklogano.zufengfm.adapters.DiscoverCategoryAdapter;
 import com.jjklogano.zufengfm.bean.DiscoverCategory;
-import com.jjklogano.zufengfm.client.ClientAPI;
 import com.jjklogano.zufengfm.fragments.BaseFragment;
 import com.jjklogano.zufengfm.tasks.DiscoverCategoryTask;
 import com.jjklogano.zufengfm.tasks.TaskCallBack;
 import com.jjklogano.zufengfm.tasks.TaskResult;
-import com.jjklogano.zufengfm.widgets.FullListView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -28,6 +27,11 @@ import java.util.List;
  */
 public class DiscoverCategoryFragment extends BaseFragment implements TaskCallBack {
 
+
+    private List<DiscoverCategory> categories;
+    private View view;
+    private ListView listView;
+    private DiscoverCategoryAdapter adapter;
 
     public DiscoverCategoryFragment() {
         // Required empty public constructor
@@ -38,11 +42,17 @@ public class DiscoverCategoryFragment extends BaseFragment implements TaskCallBa
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.discover_category_fragment, container, false);
+        view = inflater.inflate(R.layout.discover_category_fragment, container, false);
+
+        listView = (ListView) view.findViewById(R.id.discover_category_list);
+
+        categories = new ArrayList<>();
+
+        adapter = new DiscoverCategoryAdapter(getContext(),categories);
+
+        listView.setAdapter(adapter);
 
         return view;
-
-
     }
 
 
@@ -73,9 +83,9 @@ public class DiscoverCategoryFragment extends BaseFragment implements TaskCallBa
                     //TODO 加载成功
                     Object data = result.data;
                     if (data != null && data instanceof List) {
-                        List list = (List) data;
-
-                        Log.d("Category","List = " + list);
+                        categories.clear();
+                        categories.addAll((List<DiscoverCategory>) data);
+                        adapter.notifyDataSetChanged();
                     }
                 }else{
                     //TODO 加载失败

@@ -1,58 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+        >
 
-        <!-- 主界面Fragment容器-->
-        <FrameLayout
-                android:id="@+id/main_fragment_container"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+    <!-- 主界面Fragment容器-->
+    <FrameLayout
+            android:id="@+id/main_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"
+            />
+
+    <RadioGroup
+            android:id="@+id/main_tab_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_gravity="bottom"
+            >
+
+        <RadioButton
+                android:id="@+id/main_tab_item_discover"
+                style="@style/AppTheme.MainTabItem"
+                android:text="发现"
+                android:drawableTop="@drawable/tab4_selector"
                 />
-        <RadioGroup
-                android:id="@+id/main_tab_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="5dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                >
-                <RadioButton
-                        android:id="@+id/main_tab_item_discover"
-                        style="@style/AppTheme.MainTabItem"
-                        android:text="发现"
-                        android:drawableTop="@drawable/tab4_selector"
-                        />
-                <RadioButton
-                        android:id="@+id/main_tab_item_custom"
-                        style="@style/AppTheme.MainTabItem"
-                        android:drawableTop="@drawable/tab1_selector"
-                        android:text="定制听"
-                        />
-                <RadioButton
-                        android:id="@+id/main_tab_item_null"
-                        style="@style/AppTheme.MainTabItem"
-                        android:enabled="false"
-                        />
-                <RadioButton
-                        android:id="@+id/main_tab_item_download"
-                        style="@style/AppTheme.MainTabItem"
-                        android:drawableTop="@drawable/tab2_selector"
-                        android:text="下载听"
-                        />
-                <RadioButton
-                        android:id="@+id/main_tab_item_personal"
-                        style="@style/AppTheme.MainTabItem"
-                        android:drawableTop="@drawable/tab5_selector"
-                        android:text="我"
-                        />
 
-        </RadioGroup>
+        <RadioButton
+                android:id="@+id/main_tab_item_custom"
+                style="@style/AppTheme.MainTabItem"
+                android:drawableTop="@drawable/tab1_selector"
+                android:text="定制听"
+                />
 
-</LinearLayout>
+        <RadioButton
+                android:id="@+id/main_tab_item_null"
+                style="@style/AppTheme.MainTabItem"
+                android:enabled="false"
+                />
+
+        <RadioButton
+                android:id="@+id/main_tab_item_download"
+                style="@style/AppTheme.MainTabItem"
+                android:drawableTop="@drawable/tab2_selector"
+                android:text="下载听"
+                />
+
+        <RadioButton
+                android:id="@+id/main_tab_item_personal"
+                style="@style/AppTheme.MainTabItem"
+                android:drawableTop="@drawable/tab5_selector"
+                android:text="我"
+                />
+
+    </RadioGroup>
+
+    <CheckBox
+            android:id="@+id/album_detail_play_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/play_button_selector"
+            android:layout_gravity="bottom|center"
+            />
+
+</FrameLayout>

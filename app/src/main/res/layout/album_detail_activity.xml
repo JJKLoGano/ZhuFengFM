@@ -41,7 +41,20 @@
                         android:layout_marginTop="72dp"
                         android:layout_marginLeft="24dp"
                         android:layout_marginRight="24dp"
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@mipmap/default_album_cover"
+                        />
+                <TextView
+                        android:id="@+id/album_detail_cover_text"
+                        android:layout_width="88dp"
+                        android:layout_height="88dp"
+                        android:layout_marginTop="72dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:gravity="center|bottom"
+                        android:text="9.7万"
+                        android:textSize="10sp"
+                        android:textColor="#fff"
+                        android:background="@mipmap/album_shade"
                         />
 
                 <TextView
@@ -132,16 +145,6 @@
                     />
         </android.support.v4.widget.NestedScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
-    <android.support.design.widget.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fabSize = "mini"
-            app:layout_anchor="@id/album_detail_refresh"
-            app:elevation="8dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginBottom="8dp"
-            app:layout_anchorGravity="bottom|end|right"
-            />
     <CheckBox
             android:id="@+id/album_detail_play_btn"
             android:layout_width="wrap_content"

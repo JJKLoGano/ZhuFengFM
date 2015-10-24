@@ -1,8 +1,6 @@
 package com.jjklogano.zufengfm;
 
 import android.app.Service;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -49,34 +47,40 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         Bundle attrs = intent.getBundleExtra("attrs");
         int startType = attrs.getInt("startType", Constants.SERVICE_START_TYPE_NULL);
 
-        if(startType == Constants.SERVICE_START_TYPE_NULL){
+        if (startType == Constants.SERVICE_START_TYPE_NULL) {
 
-        }else if (startType == Constants.SERVICE_START_TYPE_PLAY){
+        } else if (startType == Constants.SERVICE_START_TYPE_PLAY) {
             //获取播放列表
             tracks = attrs.getParcelableArrayList("tracks");
-            //获取播放位置
-            playIndex = attrs.getInt("playIndex",0);
+            if (tracks != null) {
+                //获取播放位置
+                playIndex = attrs.getInt("playIndex", 0);
 
-            if(tracks!=null&&playIndex >= tracks.size()){
-                playIndex = 0;
+                if (playIndex >= tracks.size()) {
+                    playIndex = 0;
+                }
+                //重置播放器状态
+                mediaPlayer.reset();
 
+                //获取曲目链接
+                String url = tracks.get(playIndex).getPlayUrl32();
+                if (url != null) {
+                    url = tracks.get(playIndex).getPlayUrl64();
+                }
+
+                try {
+                    if (url != null) {
+                        mediaPlayer.setDataSource(url);
+                        mediaPlayer.prepareAsync();// 进入就绪状态
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-            //重置播放器状态
-            mediaPlayer.reset();
-
-            //获取曲目链接
-            String url = tracks.get(playIndex).getPlayUrl32();
-
-            try {
-                mediaPlayer.setDataSource(url);
-                mediaPlayer.prepareAsync();// 进入就绪状态
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }else if(startType ==Constants.SERVICE_START_TYPE_CHANGE_STATUS){
-            if(mediaPlayer.isPlaying()){
+        } else if (startType == Constants.SERVICE_START_TYPE_CHANGE_STATUS) {
+            if (mediaPlayer.isPlaying()) {
                 mediaPlayer.pause();
-            }else{
+            } else {
                 mediaPlayer.start();
             }
         }

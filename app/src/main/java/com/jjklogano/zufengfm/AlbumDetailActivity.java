@@ -2,8 +2,11 @@ package com.jjklogano.zufengfm;
 
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.View;
 import android.widget.*;
 import com.jjklogano.zufengfm.adapters.AlbumDeailAdapter;
@@ -21,6 +25,8 @@ import com.jjklogano.zufengfm.tasks.AlbumDetailTask;
 import com.jjklogano.zufengfm.tasks.TaskCallBack;
 import com.jjklogano.zufengfm.tasks.TaskResult;
 import com.jjklogano.zufengfm.utils.HttpTools;
+import com.jjklogano.zufengfm.utils.ImageDecodeTools;
+import com.jjklogano.zufengfm.widgets.CircleImageDrawable;
 import com.jjklogano.zufengfm.widgets.FullListView;
 import org.w3c.dom.Text;
 
@@ -159,13 +165,17 @@ public class AlbumDetailActivity extends AppCompatActivity implements TaskCallBa
         Intent intent = new Intent(AlbumDetailActivity.this,MusicService.class);
 
         Bundle attrs = new Bundle();
-        attrs.putInt("startType",Constants.SERVICE_START_TYPE_PLAY);
-        attrs.putInt("playIndex",position);
+        attrs.putInt("startType", Constants.SERVICE_START_TYPE_PLAY);
+        attrs.putInt("playIndex", position);
         attrs.putParcelableArrayList("tracks", tracks);
 
         intent.putExtra("attrs", attrs);
 
         startService(intent);
+
+        Bitmap bitmap = ((BitmapDrawable) imgCover.getDrawable()).getBitmap();
+        bitmap = ImageDecodeTools.getRoundedCornerBitmap(bitmap);
+        playButton.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
 
         playButton.setChecked(true);
     }
@@ -175,9 +185,10 @@ public class AlbumDetailActivity extends AppCompatActivity implements TaskCallBa
             Intent intent = new Intent(AlbumDetailActivity.this,MusicService.class);
 
             Bundle attrs = new Bundle();
-            attrs.putInt("startType",Constants.SERVICE_START_TYPE_PLAY);
+            attrs.putInt("startType",Constants.SERVICE_START_TYPE_CHANGE_STATUS);
             intent.putExtra("attrs", attrs);
 
             startService(intent);
     }
+
 }

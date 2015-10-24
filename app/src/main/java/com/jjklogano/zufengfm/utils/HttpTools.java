@@ -3,6 +3,7 @@ package com.jjklogano.zufengfm.utils;
 
 import android.content.Context;
 import android.os.Build;
+import android.view.View;
 import android.widget.ImageView;
 import com.jjklogano.zufengfm.tasks.AsyncDrawable;
 import com.jjklogano.zufengfm.tasks.ImageLoadTask;
@@ -136,6 +137,7 @@ public final class HttpTools {
         AsyncDrawable drawable = new AsyncDrawable(context.getResources(),
                 null,
                 imageLoadTask);
+
         imageView.setImageDrawable(drawable);
 
         //先设置，后执行
