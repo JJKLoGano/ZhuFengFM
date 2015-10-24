@@ -59,6 +59,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
             if(tracks!=null&&playIndex >= tracks.size()){
                 playIndex = 0;
+
             }
             //重置播放器状态
             mediaPlayer.reset();
