@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jjklogano.zufengfm" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".ZhuFengApplication"
@@ -28,6 +28,9 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity android:name=".WelcomeActivity" >
+        </activity>
+        <activity android:name=".AlbumDetailActivity"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
     </application>
 

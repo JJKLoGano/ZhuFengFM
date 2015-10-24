@@ -1,10 +1,12 @@
 package com.jjklogano.zufengfm.client;
 
+import android.util.Log;
 import com.jjklogano.zufengfm.utils.HttpTools;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.security.PrivilegedAction;
 
 /**
  * Created<br/>
@@ -52,14 +54,32 @@ public class ClientAPI {
         return ret;
     }
 
+    /**
+     * 获取专辑详情
+     * API   :http://mobile.ximalaya.com/mobile/others/ca/album/track/  203355   /true/ 1 /20?device=android&pageSize=20&albumId=203355&isAsc=true
+     *
+     */
+    public static JSONObject getAlbumDetails(long albumId,long trackId,int pageNum){
+        JSONObject ret=getData("/mobile/others/ca/album/track/"
+                + albumId
+                + "/true/"
+                + pageNum
+                + "/20?device=android&pageSize=20&albumId="
+                + albumId
+                + "&isAsc=true");
+        return ret;
+    }
+
     private static JSONObject getData(String path){
         JSONObject ret=null;
+
         byte[] data = HttpTools.doGet(API_POINT + path);
 
         if (data != null) {
             try {
                 String str = new String(data,"utf-8");
                 ret = new JSONObject(str);
+                Log.d("json",ret.toString());
             } catch (UnsupportedEncodingException | JSONException e) {
                 e.printStackTrace();
             }

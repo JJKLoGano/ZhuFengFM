@@ -1,7 +1,11 @@
 package com.jjklogano.zufengfm.utils;
 
 
+import android.content.Context;
 import android.os.Build;
+import android.widget.ImageView;
+import com.jjklogano.zufengfm.tasks.AsyncDrawable;
+import com.jjklogano.zufengfm.tasks.ImageLoadTask;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -59,7 +63,7 @@ public final class HttpTools {
                 connection.setReadTimeout(READ_TIMEOUT);
 
                 //设置通用头信息,告诉服务器客户端可接收数据类型
-                connection.setRequestProperty("accept", "application/*,text/*，image/*.*/*");
+//                connection.setRequestProperty("accept", "application/*,text/*，image/*.*/*");
                 //设置内容压缩格式
                 connection.setRequestProperty("Accept-Encoding", "gzip");
                 //USER-AGENT
@@ -125,4 +129,17 @@ public final class HttpTools {
         }
         return ret;
     }
+    public static void loadImage(Context context,ImageView imageView,String url){
+        ImageLoadTask imageLoadTask = new ImageLoadTask(imageView, 256, 128);
+
+        //采用指定一Drawable来进行图片错位处理
+        AsyncDrawable drawable = new AsyncDrawable(context.getResources(),
+                null,
+                imageLoadTask);
+        imageView.setImageDrawable(drawable);
+
+        //先设置，后执行
+        imageLoadTask.execute(url);
+    }
+
 }

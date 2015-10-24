@@ -1,7 +1,9 @@
 package com.jjklogano.zufengfm.utils;
 
+import android.util.Log;
 import com.jjklogano.zufengfm.Constants;
 import com.jjklogano.zufengfm.bean.DiscoverCategory;
+import com.jjklogano.zufengfm.bean.albumdetails.AlbumDetail;
 import com.jjklogano.zufengfm.bean.discoverRecommend.DiscoverRecommend;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,6 +57,24 @@ public class ParseUtils {
                 int code = jsonObject.getInt("ret");
                 if (code == Constants.TASK_RESULT_OK){
                     ret=new DiscoverRecommend();
+                    ret.parseJson(jsonObject);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return ret;
+    }
+    public static AlbumDetail parseAlbumDetail(JSONObject jsonObject) {
+        AlbumDetail ret = null;
+
+        if (jsonObject != null) {
+            try {
+                Log.d("json",jsonObject.toString());
+                int code = jsonObject.getInt("ret");
+                if (code == Constants.TASK_RESULT_OK){
+                    ret=new AlbumDetail();
                     ret.parseJson(jsonObject);
                 }
             } catch (JSONException e) {

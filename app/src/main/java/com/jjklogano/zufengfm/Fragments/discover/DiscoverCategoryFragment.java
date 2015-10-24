@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import com.jjklogano.zufengfm.Constants;
 import com.jjklogano.zufengfm.R;
 import com.jjklogano.zufengfm.bean.DiscoverCategory;
@@ -16,7 +18,9 @@ import com.jjklogano.zufengfm.fragments.BaseFragment;
 import com.jjklogano.zufengfm.tasks.DiscoverCategoryTask;
 import com.jjklogano.zufengfm.tasks.TaskCallBack;
 import com.jjklogano.zufengfm.tasks.TaskResult;
+import com.jjklogano.zufengfm.widgets.FullListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +38,11 @@ public class DiscoverCategoryFragment extends BaseFragment implements TaskCallBa
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.discover_category_fragment, container, false);
+        View view = inflater.inflate(R.layout.discover_category_fragment, container, false);
+
+        return view;
+
+
     }
 
 

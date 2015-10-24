@@ -68,6 +68,6 @@ public class DiscoverRecommend {
         for (FocusImages.FocusImage focusImage : focusImages.getList()) {
             images.add(focusImage.getPic());
         }
-        return null;
+        return images;
     }
 }

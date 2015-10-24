@@ -138,6 +138,7 @@ public class FocusImages extends  DiscoverRecommendItem{
         public boolean getIs_External_url() {
             return is_External_url;
         }
+
         public void parseJson(JSONObject jsonObject) throws JSONException {
             if (jsonObject != null) {
                 id = jsonObject.getInt("id");
@@ -145,6 +146,7 @@ public class FocusImages extends  DiscoverRecommendItem{
                 longTitle = jsonObject.getString("longTitle");
                 type = jsonObject.getInt("type");
                 specialId = jsonObject.optInt("specialId");
+                pic = jsonObject.getString("pic");
                 subType = jsonObject.optInt("subType");
                 isShare = jsonObject.optBoolean("isShare");
                 is_External_url = jsonObject.optBoolean("is_External_url");

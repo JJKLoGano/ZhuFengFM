@@ -1,6 +1,7 @@
 package com.jjklogano.zufengfm.fragments.discover;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import android.widget.AbsListView;
 import android.widget.ListView;
+import com.jjklogano.zufengfm.AlbumDetailActivity;
 import com.jjklogano.zufengfm.Constants;
 import com.jjklogano.zufengfm.R;
 import com.jjklogano.zufengfm.adapters.DiscoverRecommendAdapter;
@@ -17,7 +19,6 @@ import com.jjklogano.zufengfm.adapters.PicPagerAdapter;
 import com.jjklogano.zufengfm.bean.discoverRecommend.AlbumRecommend;
 import com.jjklogano.zufengfm.bean.discoverRecommend.DiscoverRecommend;
 import com.jjklogano.zufengfm.bean.discoverRecommend.DiscoverRecommendItem;
-import com.jjklogano.zufengfm.bean.discoverRecommend.RecommendAlbums;
 import com.jjklogano.zufengfm.fragments.BaseFragment;
 import com.jjklogano.zufengfm.tasks.DiscoverRecommendTask;
 import com.jjklogano.zufengfm.tasks.TaskCallBack;
@@ -35,6 +36,7 @@ public class DiscoverRecommendFragment extends BaseFragment implements TaskCallB
     private ListView listView;
     private ViewPager focusImagesPager;
     private ArrayList<String> images;
+    private PicPagerAdapter picAdapter;
 
 
     public DiscoverRecommendFragment() {
@@ -52,17 +54,19 @@ public class DiscoverRecommendFragment extends BaseFragment implements TaskCallB
 
         //创建ViewPager
         focusImagesPager = new ViewPager(getContext());
-        AbsListView.LayoutParams params = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,  DimensionUtil.convertDipToPx(container.getContext(), 60));
+        AbsListView.LayoutParams params = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,  DimensionUtil.convertDipToPx(container.getContext(), 200));
 
         focusImagesPager.setLayoutParams(params);
 
         images = new ArrayList<>();
 
-        PicPagerAdapter adapter = new PicPagerAdapter(images);
-
-        focusImagesPager.setAdapter(adapter);
-
         listView.addHeaderView(focusImagesPager);
+
+        picAdapter = new PicPagerAdapter(images);
+
+        focusImagesPager.setAdapter(picAdapter);
+
+
 
         //=============================================
         //设置点击事件
@@ -117,7 +121,9 @@ public class DiscoverRecommendFragment extends BaseFragment implements TaskCallB
                         images.clear();
                         images.addAll((((DiscoverRecommend)data).getImageList()));
                         items.addAll(((DiscoverRecommend)data).getItemList());
+                        picAdapter.notifyDataSetChanged();
                         adapter.notifyDataSetChanged();
+
                         Log.d("recommend", "List = " + data.toString());
                     }
                 }else{
@@ -136,6 +142,17 @@ public class DiscoverRecommendFragment extends BaseFragment implements TaskCallB
             long albumId = albumRecommend.getAlbumId();
 
             long trackId = albumRecommend.getTrackId();
+
+            Intent intent=new Intent(getContext(), AlbumDetailActivity.class);
+
+            Bundle bundle=new Bundle();
+
+            bundle.putLong("albumId",albumId);
+            bundle.putLong("trackId",trackId);
+
+            intent.putExtra("trackInfo",bundle);
+
+            startActivity(intent);
 
         }
     }

@@ -46,7 +46,6 @@ public class SpecialItemView extends RelativeLayout {
      */
     public SpecialItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        
         init(context, attrs);
     }
 

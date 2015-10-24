@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:id="@+id/parent"
+        android:layout_height="match_parent"
+        tools:context="com.jjklogano.zufengfm.AlbumDetailActivity"
+        >
+
+    <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:id="@+id/album_detail_appbar"
+            android:fitsSystemWindows="true"
+            >
+
+        <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentScrim="#8000"
+                app:expandedTitleGravity="top|center"
+                app:collapsedTitleGravity="center"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                >
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/album_head_bg"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.2"
+                    >
+
+                <ImageView
+                        android:id="@+id/album_detail_cover"
+                        android:layout_width="88dp"
+                        android:layout_height="88dp"
+                        android:layout_marginTop="72dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:src="@mipmap/ic_launcher"
+                        />
+
+                <TextView
+                        android:layout_toRightOf="@id/album_detail_cover"
+                        android:layout_alignTop="@id/album_detail_cover"
+                        android:id="@+id/album_detail_title"
+                        android:textColor="#fff"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textSize="18sp"
+                        android:layout_marginRight="40dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+
+                <TextView
+                        android:layout_toRightOf="@id/album_detail_cover"
+                        android:layout_below="@id/album_detail_title"
+                        android:id="@+id/album_detail_subtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="40dp"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:textColor="#fff"
+                        android:textSize="14sp"
+                        />
+
+                <TextView
+                        android:layout_toRightOf="@id/album_detail_cover"
+                        android:layout_below="@id/album_detail_subtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/arrow_right"
+                        android:layout_marginRight="8dp"
+                        android:layout_below="@id/album_detail_title"
+                        />
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.Toolbar
+                    android:id="@+id/album_detail_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.5"
+                    />
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="#4000"
+                    android:orientation="vertical"
+                    app:layout_collapseMode="none"
+                    >
+
+                <include layout="@layout/album_child_pinbar"/>
+            </LinearLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/album_detail_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+
+        <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                >
+
+            <com.jjklogano.zufengfm.widgets.FullListView
+                    android:id="@+id/album_detail_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</android.support.design.widget.CoordinatorLayout>

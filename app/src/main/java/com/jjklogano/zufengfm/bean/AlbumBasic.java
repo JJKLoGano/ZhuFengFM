@@ -48,14 +48,6 @@ public class AlbumBasic {
     public void setTags(String tags) {
         this.tags = tags;
     }
-
-    public int getTracks() {
-        return tracks;
-    }
-
-    public void setTracks(int tracks) {
-        this.tracks = tracks;
-    }
     public void parseJson(JSONObject jsonObject) throws JSONException {
         if (jsonObject != null) {
             albumId = jsonObject.getLong("albumId");
