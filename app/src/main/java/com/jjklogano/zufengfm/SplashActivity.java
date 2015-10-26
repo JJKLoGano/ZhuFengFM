@@ -4,12 +4,22 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
+import com.jjklogano.zufengfm.bean.Advs;
+import com.jjklogano.zufengfm.tasks.AdvTask;
+import com.jjklogano.zufengfm.tasks.ImageLoadTask;
+import com.jjklogano.zufengfm.tasks.TaskCallBack;
+import com.jjklogano.zufengfm.tasks.TaskResult;
+import com.jjklogano.zufengfm.utils.HttpTools;
 
 
 /**
  * 启动扉页
  */
-public class SplashActivity extends FragmentActivity implements Runnable {
+public class SplashActivity extends FragmentActivity implements Runnable, TaskCallBack {
+
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,13 +27,15 @@ public class SplashActivity extends FragmentActivity implements Runnable {
         setContentView(R.layout.splash_activity);
 
         new Thread(this).start();
+        new AdvTask(this).execute();
 
+        imageView = (ImageView) findViewById(R.id.adv_splash);
     }
 
     @Override
     public void run() {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -50,5 +62,14 @@ public class SplashActivity extends FragmentActivity implements Runnable {
         startActivity(intent);
 
         finish();
+    }
+
+    @Override
+    public void onTaskFinished(TaskResult result) {
+        Advs advs= (Advs) result.data;
+        String cover = advs.getCover();
+
+        Log.d("cover",cover);
+        HttpTools.loadImage(SplashActivity.this,imageView,cover);
     }
 }

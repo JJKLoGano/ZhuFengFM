@@ -1,6 +1,7 @@
 package com.jjklogano.zufengfm.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import com.jjklogano.zufengfm.R;
 import com.jjklogano.zufengfm.bean.albumdetails.AlbumTrack;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -68,11 +70,34 @@ public class AlbumDeailAdapter extends BaseAdapter {
 
         AlbumTrack albumTrack = tracks.get(position);
 
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("mm:ss");
         holder.textIntro.setText(albumTrack.getTitle());
-        holder.textLastUpdate.setText(albumTrack.getProcessState()+"天前");
+        holder.textTime.setText(simpleDateFormat.format(albumTrack.getDuration()));
         holder.textCount.setText(albumTrack.getPlaytimes() + "");
         holder.textCommit.setText(albumTrack.getComments() + "");
-        holder.textTime.setText(albumTrack.getDuration() + "");
+        long createdAt = albumTrack.getCreatedAt();
+        if (createdAt<0){
+            createdAt =-createdAt;
+        }
+        Log.d("creat" ,createdAt+"");
+        long time = createdAt/(long)(1000*60*60);
+        if(time<24){
+            holder.textLastUpdate.setText(time + "小时前");
+        }else{
+            time = time/24;
+            if (time<30){
+                holder.textLastUpdate.setText(time + "天前");
+            }else {
+                time = time/30;
+                if(time<12)
+                    holder.textLastUpdate.setText(time + "个月前");
+                else{
+                    time = time/12;
+                    holder.textLastUpdate.setText(time+"年前");
+                }
+            }
+        }
+
 
         return view;
     }

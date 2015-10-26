@@ -2,6 +2,7 @@ package com.jjklogano.zufengfm.utils;
 
 import android.util.Log;
 import com.jjklogano.zufengfm.Constants;
+import com.jjklogano.zufengfm.bean.Advs;
 import com.jjklogano.zufengfm.bean.DiscoverCategory;
 import com.jjklogano.zufengfm.bean.albumdetails.AlbumDetail;
 import com.jjklogano.zufengfm.bean.discoverRecommend.DiscoverRecommend;
@@ -71,11 +72,28 @@ public class ParseUtils {
 
         if (jsonObject != null) {
             try {
-                Log.d("json",jsonObject.toString());
                 int code = jsonObject.getInt("ret");
                 if (code == Constants.TASK_RESULT_OK){
                     ret=new AlbumDetail();
                     ret.parseJson(jsonObject);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return ret;
+    }
+
+    public static Object parseSplashAdv(JSONObject splashAdv) {
+        Advs ret = null;
+
+        if (splashAdv != null) {
+            try {
+                int code = splashAdv.getInt("ret");
+                if (code == Constants.TASK_RESULT_OK){
+                    ret=new Advs();
+                    ret.parseJson(splashAdv);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

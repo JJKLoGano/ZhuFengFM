@@ -2,6 +2,7 @@ package com.jjklogano.zufengfm.fragments.discover;
 
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -24,9 +25,11 @@ import com.jjklogano.zufengfm.tasks.DiscoverRecommendTask;
 import com.jjklogano.zufengfm.tasks.TaskCallBack;
 import com.jjklogano.zufengfm.tasks.TaskResult;
 import com.jjklogano.zufengfm.utils.DimensionUtil;
+import com.jjklogano.zufengfm.widgets.CustomProgressDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 
 public class DiscoverRecommendFragment extends BaseFragment implements TaskCallBack, View.OnClickListener {
@@ -37,6 +40,10 @@ public class DiscoverRecommendFragment extends BaseFragment implements TaskCallB
     private ViewPager focusImagesPager;
     private ArrayList<String> images;
     private PicPagerAdapter picAdapter;
+
+    private AsyncTask asyncTask;
+    private boolean isLooping = false;
+    private CustomProgressDialog progressDialog;
 
 
     public DiscoverRecommendFragment() {
@@ -54,7 +61,10 @@ public class DiscoverRecommendFragment extends BaseFragment implements TaskCallB
 
         //创建ViewPager
         focusImagesPager = new ViewPager(getContext());
-        AbsListView.LayoutParams params = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,  DimensionUtil.convertDipToPx(container.getContext(), 200));
+
+        focusImagesPager.setBackgroundResource(R.mipmap.activity_list_item_bg_default);
+
+        AbsListView.LayoutParams params = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,  DimensionUtil.convertDipToPx(container.getContext(), 170));
 
         focusImagesPager.setLayoutParams(params);
 
@@ -99,11 +109,17 @@ public class DiscoverRecommendFragment extends BaseFragment implements TaskCallB
     public void onResume() {
         super.onResume();
         initData();
+        isLooping=true;
     }
+
 
     private void initData() {
         DiscoverRecommendTask task=new DiscoverRecommendTask(this);
         task.execute();
+        if (!this.isHidden()) {
+            progressDialog = new CustomProgressDialog(getContext(), getResources().getString(R.string.loading), R.drawable.loading_anim);
+            progressDialog.show();
+        }
     }
 
     @Override
@@ -119,17 +135,47 @@ public class DiscoverRecommendFragment extends BaseFragment implements TaskCallB
                     if (data != null && data instanceof DiscoverRecommend) {
                         items.clear();
                         images.clear();
-                        images.addAll((((DiscoverRecommend)data).getImageList()));
+                        images.addAll((((DiscoverRecommend) data).getImageList()));
                         items.addAll(((DiscoverRecommend)data).getItemList());
                         picAdapter.notifyDataSetChanged();
                         adapter.notifyDataSetChanged();
-
-                        Log.d("recommend", "List = " + data.toString());
+//                        startAutoSwipeThread();
+                        if(progressDialog!=null&&progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                        }
                     }
                 }else{
                     //TODO 加载失败
                 }
             }
+        }
+    }
+
+    private void startAutoSwipeThread() {
+        if (asyncTask==null) {
+            isLooping=true;
+            asyncTask = new AsyncTask<Void,Integer,Void>() {
+
+                @Override
+                protected Void doInBackground(Void... params) {
+                    int i=0;
+                    while(isLooping){
+                        publishProgress(i++);
+                        try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onProgressUpdate(Integer... values) {
+                    focusImagesPager.setCurrentItem(values[0]);
+                    super.onProgressUpdate(values);
+                }
+            }.execute();
         }
     }
 
@@ -155,5 +201,17 @@ public class DiscoverRecommendFragment extends BaseFragment implements TaskCallB
             startActivity(intent);
 
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isLooping = false;
+        asyncTask = null;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
     }
 }

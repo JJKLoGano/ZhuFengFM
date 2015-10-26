@@ -68,13 +68,21 @@ public class ClientAPI {
                 + albumId
                 + "&isAsc=true");
 
-        Log.d("url","/mobile/others/ca/album/track/"
-                + albumId
-                + "/true/"
-                + pageNum
-                + "/20?device=android&pageSize=20&albumId="
-                + albumId
-                + "&isAsc=true");
+        return ret;
+    }
+
+    public static JSONObject getSplashAdv(){
+        JSONObject ret=null;
+        byte[] data = HttpTools.doGet("http://ad.ximalaya.com/ting/loading?version=4.1.7&name=loading&appid=0&device=android");
+
+        if (data != null) {
+            try {
+                String str = new String(data,"utf-8");
+                ret = new JSONObject(str);
+            } catch (UnsupportedEncodingException | JSONException e) {
+                e.printStackTrace();
+            }
+        }
         return ret;
     }
 
@@ -87,7 +95,6 @@ public class ClientAPI {
             try {
                 String str = new String(data,"utf-8");
                 ret = new JSONObject(str);
-                Log.d("json",ret.toString());
             } catch (UnsupportedEncodingException | JSONException e) {
                 e.printStackTrace();
             }
@@ -95,5 +102,6 @@ public class ClientAPI {
         return ret;
 
     }
+
 
 }
